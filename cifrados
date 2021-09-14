@@ -1,0 +1,280 @@
+package com.equipo1.cifrados;
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Scanner;
+import java.util.stream.Stream;
+
+/**
+ *
+ * @author Erika Jacqueline Collazo Espinoza | Manuel Galileo Ramírez López
+ * Emmanuel Ricardo Rincón Garcia
+ */
+public class menu {
+
+    public static int opcion = 0;
+    public static int opcionPalabra = 0;
+    public static int llave = 0;
+    public static String palabra;
+    public static char palabraCifrada;
+    public static String palabraDescifrada;
+    public static Scanner entrada = new Scanner(System.in);
+    public static double codigoPolybios = 0;
+
+// CESAR    
+    //Cesar Cifrado
+    public static int cesarCifrado(String palabra, int llave) {
+        System.out.println("Este es resultado: \n");
+
+        //El siguiente for me permite desmenuzar cada carecter del String ya que se desea obtener el valor numerico del codigo ASCII 
+        for (int i = 0; i < palabra.length(); i++) {
+            palabraCifrada = palabra.charAt(i);  // este metodo nos permite obtener cada caracter del String
+            int conversion = (int) palabraCifrada; // para obtener el valor del caracter hay que castear la variable que obtiene el char
+
+            conversion += llave; // Con el caracter convertido a entero, podemos sumar el numero de casillas que se capturo el usuario
+
+            palabraCifrada = (char) conversion; // ahora necesitamos que el valor del caracter se convierta a un char, se castea la variable.
+            System.out.print(palabraCifrada);
+        }
+
+        return 0;
+    }
+
+    // Cesar Descifrado 
+    public static int cesarDescifrado(String palabra, int llave) {
+
+        System.out.println("Este es resultado: \n");
+
+        for (int i = 0; i < palabra.length(); i++) {
+            palabraCifrada = palabra.charAt(i);
+            int conversion = (int) palabraCifrada;
+
+            conversion -= llave;
+
+            palabraCifrada = (char) conversion;
+            System.out.print(palabraCifrada);
+        }
+
+        return 0;
+    }
+
+// Polybios
+    //Polybios Cifrado
+    public static void polibyosCifrado(String palabra) {
+
+        int [] codigo = new int [57];
+        codigo[11]= 65;
+        codigo[12]= 66;
+        codigo[13]= 67;
+        codigo[14]= 68;
+        codigo[15]= 69;
+        
+        codigo[21]= 70;
+        codigo[22]= 71;
+        codigo[23]= 72;
+        codigo[24]= 73;
+        codigo[25]= 74;
+        
+        codigo[31]= 75;
+        codigo[32]= 76;
+        codigo[33]= 77;
+        codigo[34]= 78;
+        codigo[35]= 79;
+        
+        codigo[41]= 80;
+        codigo[42]= 81;
+        codigo[43]= 82;
+        codigo[44]= 83;
+        codigo[45]= 84;
+        
+        codigo[51]= 85;
+        codigo[52]= 86;
+        codigo[53]= 87;
+        codigo[54]= 88;
+        codigo[55]= 89;
+        
+        
+        int pos =-1;
+        
+        for (int i = 0; i < palabra.length(); i++) {
+            palabraCifrada = palabra.charAt(i);
+            int conversion = (int) palabraCifrada;
+
+            for (int j = 0; j < codigo.length; j++) {
+                if (codigo[j] == conversion) {
+                    pos=j;
+                    if (pos == -1) {
+                    
+                }else{
+                    System.out.println(pos);
+                }
+                }
+            }   
+        }
+    }
+
+    public static void polibyosDescifrado(String Palabra) {
+
+        int [] codigo = new int [57];
+        codigo[11]= 65;
+        codigo[12]= 66;
+        codigo[13]= 67;
+        codigo[14]= 68;
+        codigo[15]= 69;
+        
+        codigo[21]= 70;
+        codigo[22]= 71;
+        codigo[23]= 72;
+        codigo[24]= 73;
+        codigo[25]= 74;
+        
+        codigo[31]= 75;
+        codigo[32]= 76;
+        codigo[33]= 77;
+        codigo[34]= 78;
+        codigo[35]= 79;
+        
+        codigo[41]= 80;
+        codigo[42]= 81;
+        codigo[43]= 82;
+        codigo[44]= 83;
+        codigo[45]= 84;
+        
+        codigo[51]= 85;
+        codigo[52]= 86;
+        codigo[53]= 87;
+        codigo[54]= 88;
+        codigo[55]= 89;
+        
+        int pos =-1;
+        
+        
+        
+
+        for (int i = 0; i < palabra.length(); i++) {
+            palabraCifrada = palabra.charAt(i);
+            int conversion = (int) palabraCifrada;
+
+            for (int j = 0; j < codigo.length; j++) {
+                if (codigo[j] == conversion) {
+                    pos=j;
+                    if (pos == -1) {
+                    
+                }else{
+                    
+                    palabraCifrada = (char) codigo[j];
+                        System.out.println(palabraCifrada);
+                    
+                }
+                }
+            }   
+        }
+    }
+    public static void main(String[] args) {
+
+        System.out.println("Hola, bienvenido al programa para cifrar y descifrar palabras. \n");
+
+        while (opcion != 4) {
+
+            System.out.println("1. César. \n2. Polybios. \n3. Vigeneré. \n4. Salir. \n");
+            System.out.println("Del menú anterior, ingresa el número según el metodo que deseas utilizar: \n");
+            opcion = entrada.nextInt();
+
+            switch (opcion) {
+
+                case 1:
+                    System.out.println("***** César *****\n");
+                    System.out.println("Ingresa la opcion a realizar \n");
+                    System.out.println("1. Cifrar Palabra. \n2. Descifrar Palabra.");
+                    opcionPalabra = entrada.nextInt();
+
+                    entrada.nextLine();
+
+                    switch (opcionPalabra) {
+                        case 1:
+                            System.out.println("Ingresa la palabra a Cifrar: ");
+                            palabra = entrada.next();
+
+                            // se limpia el buffer de lectura de teclado
+                            entrada.nextLine();
+
+                            System.out.println("Ingresa la llave (Debe ser un valor numerico 1 - 26)");
+                            llave = entrada.nextInt();
+
+                            entrada.nextLine();
+
+                            cesarCifrado(palabra, llave);
+                            System.out.println("\n");
+                            break;
+
+                        case 2:
+                            System.out.println("Ingresa la palabra a Descifrar");
+                            palabra = entrada.next();
+
+                            // se limpia el buffer de lectura de teclado
+                            entrada.nextLine();
+
+                            System.out.println("Ingresa la llave (Debe ser un valor numerico 1 - 26)");
+                            llave = entrada.nextInt();
+
+                            entrada.nextLine();
+
+                            cesarDescifrado(palabra, llave);
+                            System.out.println("\n");
+                            break;
+
+                        default:
+                            System.out.println("Opción Incorrecta!");
+                            break;
+                    }
+
+                    break;
+
+                case 2:
+                    System.out.println("***** Polybios *****");
+                    System.out.println("Escoge la opción deseada: \n");
+                    System.out.println("1. Cifrar \n2. Descifrar");
+                    opcionPalabra = entrada.nextInt();
+                    entrada.nextLine();
+
+                    switch (opcionPalabra) {
+                        case 1:
+                            System.out.println("Ingresa la palabra a cifrar: ");
+                            palabra = entrada.nextLine().toUpperCase();
+
+                            polibyosCifrado(palabra);
+
+                            break;
+
+                        case 2:
+                            
+                            System.out.println("Ingresa el codigo a descifrar uno por uno: ");
+                            palabra = entrada.nextLine();
+
+                            polibyosDescifrado(palabra);
+                            break;
+
+                        default:
+                            break;
+
+                    }
+
+                    break;
+
+                case 3:
+                    System.out.println("***** Vigenré *****");
+                    break;
+
+                case 4:
+                    System.out.println("Hasta pronto!");
+                    break;
+
+                default:
+                    System.out.println("Esta no es una opción correcta. \n Vuelve a intentarlo.");
+                    break;
+            }
+
+        }
+
+    }
+}
